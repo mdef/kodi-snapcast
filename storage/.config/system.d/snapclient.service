@@ -1,0 +1,14 @@
+[Unit]
+Description=Snapcast client
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+Environment="LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/storage/.kodi/addons/snapserver/lib"
+ExecStart=/storage/.kodi/addons/snapserver/snapclient -d -h localhost --soundcard 10
+Type=forking
+PIDFile=/var/run/snapclient/pid
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

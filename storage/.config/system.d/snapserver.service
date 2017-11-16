@@ -1,0 +1,15 @@
+[Unit]
+Description=Snapcast server
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+Type=forking
+Environment="LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/storage/.kodi/addons/snapserver/lib"
+ExecStart=/storage/.kodi/addons/snapserver/snapserver -d --stream pipe:///tmp/snapfifo?name=default&mode=read&sampleformat=48000:16:2 --codec pcm --buffer 2000
+PIDFile=/var/run/snapserver/pid
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target
